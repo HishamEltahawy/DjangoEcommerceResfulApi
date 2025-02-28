@@ -19,6 +19,7 @@ urlpatterns = [
     # Apps paths
     path('api/products/', include('ProductsApp.urls')),
     path('api/accounts/', include('AccountsApp.urls')),
+    path('api/orders/', include('OrdersApp.urls')),
 ]
 # These working on error_view.py file for back message Json response for errors 404 and 500
 handler404 = 'utils.error_view.handler_404'
