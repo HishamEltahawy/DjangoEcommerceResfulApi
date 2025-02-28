@@ -1,176 +1,232 @@
-# DjangoEcommerceResfulApi
-Ecommerce web application using Django-Restful-Framework  
-Django Ecommerce RESTful API Documentation
-Overview
-This project is a RESTful API for an ecommerce platform built using Django and Django REST framework. It includes functionalities for user registration, authentication, product management, order processing, and more.
+# Django Ecommerce RESTful API Documentation
 
-Project Structure
-Installation
-Clone the repository:
+## Overview
+هذا المشروع هو **واجهة برمجية RESTful** لمنصة **التجارة الإلكترونية** مبنية باستخدام **Django** و **Django REST Framework**، ويشمل الميزات التالية:
+- تسجيل المستخدمين وتوثيقهم
+- إدارة المنتجات
+- معالجة الطلبات
+- والمزيد...
 
-Create a virtual environment and activate it:
+---
 
-Install the dependencies:
+## 📂 Project Structure
+```
+DjangoEcommerceResfulApi/
+├── AccountsApp/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── OrdersApp/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── ProductsApp/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── serializers.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
+├── ProjectFiles/
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── manage.py
+└── requirements.txt
+```
 
-Apply the migrations:
+---
 
-Create a superuser:
+## 🚀 Installation
 
-Run the development server:
+1. **استنساخ المستودع:**
+```sh
+git clone https://github.com/yourusername/DjangoEcommerceResfulApi.git
+cd DjangoEcommerceResfulApi
+```
 
-API Endpoints
-AccountsApp
-User Registration
-URL: /api/accounts/register/
-Method: POST
-Description: Registers a new user.
-Request Body:
-Response:
-Forget Password
-URL: /api/accounts/forget_password/
-Method: POST
-Description: Sends a password reset link to the user's email.
-Request Body:
-Response:
-Reset Password
-URL: /api/accounts/reset_password/<token>/
-Method: POST
-Description: Resets the user's password using the provided token.
-Request Body:
-Response:
-OrdersApp
-Get All Orders
-URL: /api/orders/
-Method: GET
-Description: Retrieves all orders.
-Response:
-Get One Order
-URL: /api/orders/<pk>/
-Method: GET
-Description: Retrieves a single order by its ID.
-Response:
-Process Order
-URL: /api/orders/<pk>/process/
-Method: PUT
-Description: Updates the status of an order.
-Request Body:
-Response:
-Delete Order
-URL: /api/orders/<pk>/
-Method: DELETE
-Description: Deletes an order by its ID.
-Response:
-Create New Order
-URL: /api/orders/new/
-Method: POST
-Description: Creates a new order.
-Request Body:
-Response:
-ProductsApp
-Get All Products
-URL: /api/products/
-Method: GET
-Description: Retrieves all products.
-Response:
-Get One Product
-URL: /api/products/<pk>/
-Method: GET
-Description: Retrieves a single product by its ID.
-Response:
-Create New Product
-URL: /api/products/new/
-Method: POST
-Description: Creates a new product.
-Request Body:
-Response:
-Update Product
-URL: /api/products/<pk>/
-Method: PUT
-Description: Updates an existing product.
-Request Body:
-Response:
-Delete Product
-URL: /api/products/<pk>/
-Method: DELETE
-Description: Deletes a product by its ID.
-Response:
-Models
-AccountsApp
-Profile
-Fields:
-user: ForeignKey to User
-new_token: CharField
-ex_date: DateTimeField
-OrdersApp
-Order
-Fields:
-user: ForeignKey to User
-city: CharField
-zip_code: CharField
-street: CharField
-phone_no: CharField
-country: CharField
-total_amount: FloatField
-status: CharField
-created_at: DateTimeField
-updated_at: DateTimeField
-OrderItem
-Fields:
-product: ForeignKey to Product
-order: ForeignKey to Order
-name: CharField
-quantity: IntegerField
-price: FloatField
-ProductsApp
-Product
-Fields:
-name: CharField
-description: TextField
-price: FloatField
-stock: IntegerField
-created_at: DateTimeField
-updated_at: DateTimeField
-Serializers
-AccountsApp
-SzSignup
-Fields:
-username
-first_name
-last_name
-email
-password
-SzUsers
-Fields:
-username
-first_name
-last_name
-email
-OrdersApp
-OrderSerializer
-Fields:
-id
-user
-city
-zip_code
-street
-phone_no
-country
-total_amount
-status
-created_at
-updated_at
-ProductsApp
-ProductSerializer
-Fields:
-id
-name
-description
-price
-stock
-created_at
-updated_at
-Permissions
-IsAuthenticated: Ensures that the user is authenticated.
-IsAdminUser: Ensures that the user is an admin.
-Conclusion
-This documentation provides an overview of the Django Ecommerce RESTful API project, including installation instructions, API endpoints, models, serializers, and permissions. This should help you understand and work with the project effectively. If you have any questions or need further assistance, feel free to reach out.
+2. **إنشاء البيئة الافتراضية وتفعيلها:**
+```sh
+python -m venv venv
+venv\Scripts\activate  # على Windows
+source venv/bin/activate  # على macOS/Linux
+```
+
+3. **تثبيت المتطلبات:**
+```sh
+pip install -r requirements.txt
+```
+
+4. **تطبيق الترحيلات:**
+```sh
+python manage.py migrate
+```
+
+5. **إنشاء مستخدم مدير:**
+```sh
+python manage.py createsuperuser
+```
+
+6. **تشغيل خادم التطوير:**
+```sh
+python manage.py runserver
+```
+
+---
+
+## 📌 API Endpoints
+
+### 📌 AccountsApp
+#### 🟢 User Registration
+- **URL:** `/api/accounts/register/`
+- **Method:** `POST`
+- **Description:** تسجيل مستخدم جديد.
+- **Request Body:**
+```json
+{
+  "username": "string",
+  "first_name": "string",
+  "last_name": "string",
+  "email": "string",
+  "password": "string"
+}
+```
+- **Response:**
+```json
+{
+  "details": "Add User Successful"
+}
+```
+
+#### 🔵 Forget Password
+- **URL:** `/api/accounts/forget_password/`
+- **Method:** `POST`
+- **Description:** إرسال رابط إعادة تعيين كلمة المرور إلى البريد الإلكتروني.
+
+#### 🟡 Reset Password
+- **URL:** `/api/accounts/reset_password/<token>/`
+- **Method:** `POST`
+- **Description:** إعادة تعيين كلمة المرور باستخدام التوكن.
+
+### 📌 OrdersApp
+#### 🟢 Get All Orders
+- **URL:** `/api/orders/`
+- **Method:** `GET`
+- **Description:** استرجاع جميع الطلبات.
+
+#### 🔵 Get One Order
+- **URL:** `/api/orders/<pk>/`
+- **Method:** `GET`
+- **Description:** استرجاع طلب معين باستخدام **ID**.
+
+#### 🟡 Process Order
+- **URL:** `/api/orders/<pk>/process/`
+- **Method:** `PUT`
+- **Description:** تحديث حالة الطلب.
+
+#### 🔴 Delete Order
+- **URL:** `/api/orders/<pk>/`
+- **Method:** `DELETE`
+- **Description:** حذف طلب معين.
+
+#### 🟢 Create New Order
+- **URL:** `/api/orders/new/`
+- **Method:** `POST`
+- **Description:** إنشاء طلب جديد.
+
+### 📌 ProductsApp
+#### 🟢 Get All Products
+- **URL:** `/api/products/`
+- **Method:** `GET`
+- **Description:** استرجاع جميع المنتجات.
+
+#### 🔵 Get One Product
+- **URL:** `/api/products/<pk>/`
+- **Method:** `GET`
+- **Description:** استرجاع منتج معين باستخدام **ID**.
+
+#### 🟢 Create New Product
+- **URL:** `/api/products/new/`
+- **Method:** `POST`
+- **Description:** إنشاء منتج جديد.
+
+#### 🟡 Update Product
+- **URL:** `/api/products/<pk>/`
+- **Method:** `PUT`
+- **Description:** تحديث منتج موجود.
+
+#### 🔴 Delete Product
+- **URL:** `/api/products/<pk>/`
+- **Method:** `DELETE`
+- **Description:** حذف منتج معين.
+
+---
+
+## 🛠 Models
+
+### 📌 AccountsApp
+#### Profile
+- `user`: `ForeignKey(User)`
+- `new_token`: `CharField`
+- `ex_date`: `DateTimeField`
+
+### 📌 OrdersApp
+#### Order
+- `user`: `ForeignKey(User)`
+- `city`: `CharField`
+- `zip_code`: `CharField`
+- `street`: `CharField`
+- `phone_no`: `CharField`
+- `country`: `CharField`
+- `total_amount`: `FloatField`
+- `status`: `CharField`
+- `created_at`: `DateTimeField`
+- `updated_at`: `DateTimeField`
+
+#### OrderItem
+- `product`: `ForeignKey(Product)`
+- `order`: `ForeignKey(Order)`
+- `name`: `CharField`
+- `quantity`: `IntegerField`
+- `price`: `FloatField`
+
+### 📌 ProductsApp
+#### Product
+- `name`: `CharField`
+- `description`: `TextField`
+- `price`: `FloatField`
+- `stock`: `IntegerField`
+- `created_at`: `DateTimeField`
+- `updated_at`: `DateTimeField`
+
+---
+
+## 🔐 Permissions
+- `IsAuthenticated`: يضمن أن المستخدم **مسجل الدخول**.
+- `IsAdminUser`: يضمن أن المستخدم **مشرف**.
+
+---
+
+## 📢 Conclusion
+هذا التوثيق يوفر نظرة شاملة على **Django Ecommerce RESTful API**، بما في ذلك:
+- تثبيت المشروع
+- نقاط النهاية **(API Endpoints)**
+- النماذج **(Models)**
+- المتسلسلات **(Serializers)**
+- الأذونات **(Permissions)**
+
+إذا كنت بحاجة إلى أي استفسارات أو دعم، لا تتردد في التواصل! 🚀

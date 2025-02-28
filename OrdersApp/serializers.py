@@ -1,11 +1,14 @@
 from rest_framework import serializers
 from .models import Order,OrderItem
 
+# The `OrderItemsSerializer` class is a Django REST framework serializer for the `OrderItem` model
+# with all fields included.
 class OrderItemsSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrderItem
         fields = "__all__"
-
+        
+# The `OrderSerializer` class serializes Order objects along with their related OrderItems.
 class OrderSerializer(serializers.ModelSerializer):
     orderItems = serializers.SerializerMethodField(method_name="get_order_items", read_only=True)
     class Meta:

@@ -1,7 +1,9 @@
 from django.urls import path
 from . import views
 
-
+# This code snippet is defining URL patterns for a Django application. Each `path` function call
+# specifies a URL pattern along with the corresponding view function that should be called when that
+# URL is accessed.
 urlpatterns = [
     path('new_order/', views.new_order,name='new_order'), 
     path('get_all_orders/', views.get_all_orders,name='get_all_orders'), 
