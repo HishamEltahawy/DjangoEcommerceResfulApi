@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class SzSignup(serializers.ModelSerializer):
     class Meta():
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password')
         
         extra_kwargs = {
             'username':{
@@ -27,4 +27,4 @@ class SzSignup(serializers.ModelSerializer):
 class SzUsers(serializers.ModelSerializer):
     class Meta():
         model = User
-        fields = ('first_name', 'last_name', 'email', 'password')
+        fields = ('id', 'first_name', 'last_name', 'email', 'username')

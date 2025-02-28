@@ -14,8 +14,19 @@ SECRET_KEY = 'django-insecure-)%enu&oxm3%!r1iqxjrle_tbpnhrr(y+m@bue=o1&5mrae5@#r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = []
 
+# Looking to send emails in production? Check out our Email API/SMTP product!
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'sandbox.smtp.mailtrap.io'
+EMAIL_HOST_USER = '70a32cb79504b6'
+EMAIL_HOST_PASSWORD = '9371eae9083b22'
+EMAIL_PORT = '2525'
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 # Application definition
 
@@ -35,8 +46,7 @@ INSTALLED_APPS = [
     # General Apps
     'ProductsApp',
     'AccountsApp',
-
-    
+    'OrdersApp',
 ]
 
 MIDDLEWARE = [
