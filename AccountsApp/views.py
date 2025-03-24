@@ -27,20 +27,28 @@ def register(request):
                 password=make_password(data['password']),  # Use make_password library to encrypt password
             )
             # Ensure a profile is created for the user
-            user.profile = Profile.objects.create(user=user)
+            user.profile = Profile.objects.create(user=user) # review
             return Response({'details': 'Add User Successful'}, status=status.HTTP_201_CREATED)
         else:
-            return Response({'details': 'This Account Is Exist'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'details': 'This Account Already Exist'}, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response(serializer.errors)
     
+"""
+This function returns details of the current authenticated user in a Django REST framework API view.
+
+:param request: The `request` parameter in the `current_user` function is an object that contains
+information about the current HTTP request. It includes details such as the user making the request,
+the request method (GET, POST, etc.), headers, and any data sent with the request. In this case, the
+:return: The code snippet is a Django REST framework view function that returns details of the
+current authenticated user. The function uses a serializer to serialize the user object and extract
+the username from the serialized data. Finally, it returns a JSON response containing the serialized
+user data under the key 'details'.
+"""
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def current_user(request):
     serializer = SzUsers(request.user)
-    usernameget = serializer.data
-    usernameget = usernameget['username']
-    
     return Response({'details':serializer.data})
 
 # Update user details

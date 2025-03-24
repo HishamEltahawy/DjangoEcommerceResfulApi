@@ -14,6 +14,4 @@ def auto_add_profile(sender, instance, created, **kwargs):
     user = instance
     if created:
         profile = Profile(user = user)
-        profile.save()
-        
-        
+        profile.save()  

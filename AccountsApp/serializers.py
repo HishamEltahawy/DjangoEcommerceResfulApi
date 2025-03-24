@@ -23,6 +23,7 @@ class SzSignup(serializers.ModelSerializer):
                 'required':True
                 , 'allow_blank':False
                 , 'min_length':8}
+                , 'write_only': True  # يمنع إرسال كلمة المرور في الردود
         }
 class SzUsers(serializers.ModelSerializer):
     class Meta():
